@@ -7,3 +7,4 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versio
 
 ### Added
 - Project scaffolding: README, MIT license, changelog, development log, architecture decision records, test-server guide.
+- ADR 0006: networking module (VPN, Cloudflare Tunnel, DDNS) planned.

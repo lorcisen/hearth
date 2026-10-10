@@ -17,6 +17,7 @@ Three layers:
    - `BackupStorage` (B2 / R2 / S3 / local)
    - `VpsProvider` (Hetzner / DigitalOcean / Vultr)
    - `Notifier` (Windows, email, Discord, Telegram, Slack)
+   - `IngressProvider` (Direct / Cloudflare Tunnel / VPN) — added by [ADR 0006](0006-networking-ingress.md)
 3. **Modules** — self-contained features (Docker, Monitoring, Security, Recipes, AI, Reports, …).
    Each module has a manifest, its own Rust commands and its own frontend routes/pages,
    and registers itself in one place. Removing a module must not break the core.

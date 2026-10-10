@@ -16,6 +16,7 @@ Every action shows the exact commands it runs, and config changes can be undone.
 - **Docker** — containers, images, volumes, networks, live logs, compose stacks, image update checks; apps exposed through Hestia proxy templates
 - **App catalog** — one-click templates (WordPress, Nextcloud, Uptime Kuma, Gitea, n8n, Vaultwarden, …)
 - **Cloudflare** — zones, DNS records, proxy toggle, SSL mode, cache purge, Cloudflare Tunnel, DNS-01 certificates
+- **Networking** — OpenVPN/WireGuard client for a public IP behind CGNAT (e.g. mobile data), split routing that keeps LAN access, DDNS to Cloudflare, mail-readiness checks, SMTP relay
 - **Monitoring & alerts** — CPU/RAM/disk, services, uptime checks, SSL/domain expiry, notifications (Windows, email, Discord, Telegram, Slack)
 - **Backups** — scheduled, to B2 / R2 / S3 / local, with restore and verification
 - **Security** — firewall & fail2ban GUI, security score with one-click fixes, SSH key management

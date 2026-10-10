@@ -39,6 +39,15 @@ A physical machine has no snapshots, so pick one of these:
   Make a second image `hestia-installed` once HestiaCP is on.
 - **Reinstall:** reinstall Ubuntu from the USB stick (~15–20 min).
 
+## Connectivity
+
+- Internet via **5G mobile data** → behind carrier NAT (CGNAT), no public IP of its own.
+- Public IPv4 via **OVPN.com** (OpenVPN, public IPv4 add-on, all ports open) — needed for **mail**.
+- Websites can use **Cloudflare Tunnel** instead and don't need the VPN.
+- Hearth connects over the **LAN IP** while developing.
+- ⚠️ Don't set up OpenVPN by hand yet — a default OpenVPN config routes *all* traffic through the tunnel and can
+  cut off SSH from the LAN. Hearth's Networking module (v0.3) sets it up with split routing. See [ADR 0006](decisions/0006-networking-ingress.md).
+
 ## Domain
 
 - Test domain: **burken.stream** (on Cloudflare). Use it freely for experiments — not production.

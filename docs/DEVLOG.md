@@ -5,6 +5,22 @@ Each entry: what was done, why, files touched, next step.
 
 ---
 
+## 2026-10-10 — Networking: 5G/CGNAT + OVPN.com public IP
+
+**Context**
+- Test server is on 5G mobile data (CGNAT). Public IPv4 via **OVPN.com** (OpenVPN, all ports open).
+
+**Decision** — [ADR 0006](decisions/0006-networking-ingress.md)
+- New **Networking module** + `IngressProvider` interface (Direct / Cloudflare Tunnel / VPN).
+- VPN is needed for **mail**; websites can use Cloudflare Tunnel. Planned for **v0.3**.
+- Key requirement: split routing so LAN SSH survives the tunnel, with auto-rollback.
+
+**Files**
+- `docs/decisions/0006-networking-ingress.md` (new)
+- `docs/decisions/README.md`, `docs/decisions/0004-modular-architecture.md`, `README.md`, `docs/test-server.md`, `docs/DEVLOG.md` (updated)
+
+---
+
 ## 2026-10-10 — Test server: physical ThinkCentre instead of Hyper-V
 
 **Decision**
