@@ -1,0 +1,25 @@
+# Node / frontend
+node_modules/
+dist/
+.vite/
+*.log
+
+# Rust / Tauri
+target/
+src-tauri/gen/
+
+# Secrets & local config — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+
+# Editors / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
