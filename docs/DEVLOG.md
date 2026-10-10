@@ -5,6 +5,18 @@ Each entry: what was done, why, files touched, next step.
 
 ---
 
+## 2026-10-10 — Test server: physical ThinkCentre instead of Hyper-V
+
+**Decision**
+- Test server is a dedicated **Lenovo ThinkCentre** (not a Hyper-V VM).
+- No snapshots on bare metal → clean state restored via **Clonezilla** disk images (`clean-install`, `hestia-installed`) or reinstall.
+
+**Files**
+- `docs/test-server.md` (rewritten: hardware, BIOS settings, USB install, Clonezilla)
+- `docs/DEVLOG.md` (updated)
+
+---
+
 ## 2026-10-10 — Name, repository & project docs
 
 **Decisions**

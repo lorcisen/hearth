@@ -1,29 +1,51 @@
 # Test server setup (home lab)
 
-Hearth is developed against a local Hyper-V VM so we can snapshot and reset to a clean OS at will
-(HestiaCP requires a fresh server).
+Hearth is developed against a dedicated physical test machine at home: a **Lenovo ThinkCentre**
+running Ubuntu Server. HestiaCP requires a fresh server, so we keep a way to quickly return to a clean OS.
 
-## VM
+## Hardware
 
-1. Enable **Hyper-V** (Settings → System → Optional features → More Windows features → Hyper-V), reboot.
-2. Hyper-V Manager → Virtual Switch Manager → create an **External** switch (VM gets a LAN IP).
-3. New VM: Generation 2, **2 vCPU, 4 GB RAM, 40 GB disk**. Secure Boot template: *Microsoft UEFI Certificate Authority*.
-4. Install **Ubuntu Server 24.04 LTS**:
+- Lenovo ThinkCentre (any recent model is fine). Recommended: **≥ 4 GB RAM, ≥ 64 GB SSD**.
+- Connect with **wired Ethernet** (more stable than Wi-Fi for a server).
+- USB stick (≥ 4 GB) for the installer.
+
+## BIOS (F1 at boot)
+
+- **After Power Loss → Power On** — server comes back by itself after a power cut.
+- **Wake on LAN → enabled** (optional, lets Hearth wake the machine later).
+- Boot order: USB first during install. Secure Boot can stay on (Ubuntu supports it).
+
+## Install Ubuntu Server 24.04 LTS
+
+1. Download Ubuntu Server 24.04 LTS from ubuntu.com and write it to the USB stick
+   with **Rufus** or **balenaEtcher**.
+2. Boot the ThinkCentre from USB and install:
+   - Use the **entire disk** (no LVM needed, default is fine).
    - Select **only** "Install OpenSSH server".
-   - Do **not** select any featured snaps (especially not Docker).
+   - Do **not** select any featured snaps (especially not Docker) — Hearth installs everything.
    - Create a normal user with sudo.
-5. Reserve a fixed IP for the VM in the router (DHCP reservation).
-6. Verify from Windows: `ssh <user>@<ip>`.
-7. Take checkpoint **`clean-install`**.
+3. Reserve a **fixed IP** for the machine in the router (DHCP reservation, use the MAC address of the Ethernet port).
+4. Verify from Windows: `ssh <user>@<ip>`.
+5. Run updates once: `sudo apt update && sudo apt full-upgrade -y && sudo reboot`.
 
-Later checkpoints: **`hestia-installed`** (after HestiaCP install).
+Do **not** install HestiaCP, Docker or anything else by hand — testing Hearth's own installers is the point.
+
+## Getting back to a clean state
+
+A physical machine has no snapshots, so pick one of these:
+
+- **Disk image (recommended):** after step 5, boot **Clonezilla** from USB and save an image of the disk
+  (e.g. to a USB drive or a network share) named `clean-install`. Restoring takes a few minutes.
+  Make a second image `hestia-installed` once HestiaCP is on.
+- **Reinstall:** reinstall Ubuntu from the USB stick (~15–20 min).
 
 ## Domain
 
 - Test domain: **burken.stream** (on Cloudflare). Use it freely for experiments — not production.
-- The server is behind NAT, so certificates use **Cloudflare Tunnel** or **DNS-01** validation; no port forwarding needed.
+- The server is behind the home router (NAT), so certificates use **Cloudflare Tunnel** or **DNS-01**
+  validation — no port forwarding needed.
 
 ## Rules
 
 - Never develop/test against production servers.
-- Revert to `clean-install` before testing installer flows.
+- Restore `clean-install` before testing installer flows.
